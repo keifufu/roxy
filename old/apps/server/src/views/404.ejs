@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>404 Not Found</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" href="assets/favicon.ico">
+  <script src="assets/theme.js"></script>
+  <link rel="stylesheet" href="assets/base.css">
+  <style>
+    .header {
+      font-size: 10rem;
+      font-weight: bold;
+    }
+    .subheader {
+      font-size: 3rem;
+      font-weight: bold;
+    }
+    a {
+      display: block;
+      width: 115px;
+      height: 25px;
+      margin-top: 10px;
+      text-decoration: none;
+      background: var(--mauve);
+      color: var(--text);
+      padding: 10px;
+      text-align: center;
+      border-radius: 5px;
+      font-weight: bold;
+      line-height: 25px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">404</div>
+    <div class="subheader">PAGE NOT FOUND</div>
+    <p>The page you were looking for does not exist</p>
+    <a href="<%= appPath; %>">Go Home</a>
+  </div>
+</body>
+</html>

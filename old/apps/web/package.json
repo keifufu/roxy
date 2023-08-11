@@ -1,0 +1,35 @@
+{
+  "name": "web",
+  "version": "0.0.1-dev",
+  "description": "",
+  "scripts": {
+    "start": "vite",
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@solid-primitives/media": "^2.1.6",
+    "@solidjs/router": "^0.8.2",
+    "@trpc/client": "^10.20.0",
+    "clsx": "^1.2.1",
+    "solid-icons": "^1.0.4",
+    "solid-js": "^1.7.3",
+    "superjson": "^1.12.2",
+    "tw-colors": "^1.2.4"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.58.0",
+    "@typescript-eslint/parser": "^5.58.0",
+    "autoprefixer": "^10.4.14",
+    "eslint": "^8.38.0",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-tailwindcss": "^3.11.0",
+    "postcss": "^8.4.21",
+    "tailwindcss": "^3.3.1",
+    "typescript": "^5.0.4",
+    "vite": "^4.2.1",
+    "vite-plugin-solid": "^2.7.0"
+  }
+}

@@ -1,0 +1,5 @@
+.FileHeader-base {
+  width: 100%;
+  background-color: var(--crust);
+  padding: 1rem;
+}

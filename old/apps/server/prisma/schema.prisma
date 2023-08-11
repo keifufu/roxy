@@ -1,0 +1,147 @@
+// Some relations will seem nonsensical due to one-way relations not being supported yet.
+// Refer to https://github.com/prisma/prisma/issues/2018 for more information.
+// Relation fields deemed unnessecary will be commented with // @issue #2018
+// They will also be prefixed 'ZDONTUSE_' to prevent accidental use,
+// starting with 'Z' to be at the bottom of the list in autocompletion.
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["extendedWhereUnique"]
+}
+
+generator zod {
+  provider      = "zod-prisma"
+  output        = "../src/@generated/zod-prisma"
+  relationModel = false
+  modelSuffix   = "PrismaModel"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:../../../data/roxy.db"
+}
+
+// ==================== START USER & AUTH ====================
+
+model User {
+  id                String     @id @default(uuid())
+  username          String     @unique
+  hashedPassword    String
+  mfaSecret         String?
+  mfaBackupCodes    String // sqlite doesn't support generic lists, so we just use a string separated by commas
+  hasMfaEnabled     Boolean    @default(false)
+  apiKey            String     @unique
+  sessions          Session[]
+  scheduledDeletion DateTime?
+  createdAt         DateTime   @default(now())
+  updatedAt         DateTime   @updatedAt
+  isAdministrator   Boolean    @default(false)
+  limits            UserLimits @relation(fields: [limitsId], references: [id])
+  limitsId          String     @unique
+  usage             UserUsage  @relation(fields: [usageId], references: [id])
+  usageId           String     @unique
+}
+
+// These can then be modified per-user by admins
+model UserLimits {
+  id            String @id @default(uuid())
+  totalMB       Int
+  customUrls    Int
+  ZDONTUSE_User User?
+}
+
+model UserUsage {
+  id            String @id @default(uuid())
+  bytesUsed     Int    @default(0)
+  ZDONTUSE_User User?
+}
+
+model Session {
+  id                 String   @id @default(uuid())
+  userId             String
+  user               User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  app                String
+  ipAddress          String
+  estimatedLocation  String
+  hashedRefreshToken String   @unique
+  isMfaAuthenticated Boolean  @default(false)
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+}
+
+// ==================== END USER & AUTH ====================
+
+// ==================== START SHARED ====================
+
+model UniqueKey {
+  id           String        @id @default(uuid())
+  userId       String
+  key          String        @unique
+  clickCount   Int           @default(0)
+  clicks       Click[]
+  UrlShortener UrlShortener?
+  Paste        Paste?
+  File         File?
+}
+
+model Click {
+  id          String     @id @default(uuid())
+  ipAddress   String     @default("unknown")
+  location    String     @default("unknown")
+  userAgent   String     @default("unknown")
+  createdAt   DateTime   @default(now())
+  UniqueKey   UniqueKey? @relation(fields: [uniqueKeyId], references: [id], onDelete: Cascade)
+  uniqueKeyId String?
+}
+
+// ==================== END SHARED ====================
+
+// ==================== START URL SHORTENER ====================
+
+model UrlShortener {
+  id             String    @id @default(uuid())
+  userId         String
+  uniqueKey      UniqueKey @relation(fields: [uniqueKeyId], references: [id], onDelete: Cascade)
+  uniqueKeyId    String    @unique
+  isCustomKey    Boolean
+  expirationDate DateTime?
+  maxClicks      Int?
+  destinationUrl String
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+}
+
+// ==================== END URL SHORTENER ====================
+
+// ==================== START PASTES ====================
+
+model Paste {
+  id          String    @id @default(uuid())
+  userId      String
+  uniqueKey   UniqueKey @relation(fields: [uniqueKeyId], references: [id], onDelete: Cascade)
+  uniqueKeyId String    @unique
+  title       String
+  content     String
+  bytes       Int
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+// ==================== END PASTES ====================
+
+// ==================== START FILES ====================
+
+model File {
+  id             String    @id @default(uuid())
+  thumbnailId    String?   @default(uuid())
+  thumbnailBytes Int       @default(0)
+  userId         String
+  uniqueKey      UniqueKey @relation(fields: [uniqueKeyId], references: [id], onDelete: Cascade)
+  uniqueKeyId    String    @unique
+  filename       String
+  ext            String
+  mimeType       String
+  bytes          Int
+}
+
+// ==================== END FILES ====================

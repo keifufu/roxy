@@ -1,0 +1,36 @@
+// Read more on the Wiki: https://github.com
+{
+  // The name shown in the WebUI
+  "name": "Roxy",
+  // The URL Roxy will be available on (including via proxy)
+  // This is returned to ShareX after uploads.
+  // Valid Examples:
+  // http://keifufu.dev/roxy
+  // https://roxy.keifufu.dev
+  // https://s.keifufu.dev:727/apps/roxy
+  "url": "https://roxy.keifufu.dev",
+  // The port the server will run on
+  // 80 = HTTP; 443 = HTTPS
+  // Can also be any other port
+  "port": 727,
+  // Whether to run Roxy on https
+  "https": false,
+  // Provide paths to your ssl certificate here
+  // if you set https to true
+  "sslCertPath": null,
+  "sslKeyPath": null,
+  // Whether Roxy is running behind a proxy
+  "isProxied": true,
+  // If registrations are enabled or not
+  "allowRegistrations": true,
+  // Default limits for new users
+  // These can be adjusted per-user by admins
+  // -1 for unlimited
+  // Note: Admins have no limits
+  "totalMB": 50,
+  "customUrls": 0,
+  // How many characters in url keys
+  "urlShortenerKeyLength": 5,
+  "pasteKeyLength": 5,
+  "fileKeyLength": 5
+}

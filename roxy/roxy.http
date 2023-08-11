@@ -1,0 +1,9 @@
+@host = https://dev.keifufu.dev
+
+post {{host}}/api/auth/login
+Content-Type: application/json
+
+{
+  "username": "keifufu",
+  "password": "password123"
+}

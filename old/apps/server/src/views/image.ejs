@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= filename; %></title>
+  <meta property="og:title" content="<%= filename; %>">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" href="assets/favicon.ico">
+  <script src="assets/theme.js"></script>
+  <link rel="stylesheet" href="assets/base.css">
+  <style>
+    img {
+      height: 100vh;
+      object-fit: contain;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img src="<%= url; %>">
+  </div>
+</body>
+</html>

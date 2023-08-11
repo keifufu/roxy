@@ -1,0 +1,16 @@
+{
+  "name": "roxy",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "env": "node ./scripts/env.js",
+    "dev": "pnpm --filter * run dev",
+    "build": "pnpm run env && pnpm -r run build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "jsonc-parser": "^3.2.0"
+  }
+}

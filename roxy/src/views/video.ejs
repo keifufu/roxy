@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- HTML Meta Tags -->
+  <title><%= filename; %></title>
+  <meta name="description" content="">
+  <link rel="icon" href="assets/favicon.ico">
+  <meta name="theme-color" content="#282c34">
+
+  <!-- OpenGraph Meta Tags -->
+  <meta property="og:url" content="<url here>">
+  <meta property="og:type" content="video">
+  <meta property="og:title" content="<%= filename; %>">
+  <meta property="og:description" content="">
+  <meta property="og:video" content="<%= ogVideoUrl; %>">
+  <meta property="og:image" content="<%= ogImageUrl; %>">
+  <meta property="og:video:secure_url" content="<%= ogVideoUrl; %>">
+  <meta property="og:video:height" content="480">
+  <meta property="og:video:width" content="640">
+  
+  <!-- Twitter Meta Tags -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:domain" content="<domain here>">
+  <meta property="twitter:url" content="<url here>">
+  <meta property="twitter:title" content="<%= filename; %>">
+  <meta property="twitter:description" content="">
+  <meta property="twitter:image" content="<%= ogImageUrl; %>">
+  <style>
+    html, body {
+      height: 100%;
+    }
+    body {
+      background-color: #282c34;
+      color: white;
+    }
+    .container {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <video controls>
+      <source src="<%= url; %>">
+    </video>
+  </div>
+</body>
+</html>
